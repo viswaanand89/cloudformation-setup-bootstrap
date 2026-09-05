@@ -1,0 +1,13 @@
+Parameters:
+  bucketname:
+    Type: String 
+    Description: Provide the Bucket Name
+Resources:
+  cfnbucketboot:
+     Type: AWS::S3::Bucket
+     Properties:
+        BucketName: !Ref bucketname
+        BucketEncryption:
+           ServerSideEncryptionConfiguration:
+           - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
