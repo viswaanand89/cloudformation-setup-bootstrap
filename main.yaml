@@ -3,6 +3,4 @@ Resources:
   myStackWithParams:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: https://s3.amazonaws.com/cfnbucketboot/s3.yaml
-      Parameters:
-          bucketname: cfnbucketboot
+      TemplateURL: !Sub ""
