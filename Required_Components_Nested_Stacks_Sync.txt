@@ -1,0 +1,14 @@
+Github Actions Workflow :
+    - One Pipeline For pushing BootStrap Components to S3 Bucket
+    - One Pipeline for Resource Managemen like S3 , VPC stacks in CloudFormation
+
+- The BootStrap Components for testing are,
+        1. S3 Bucket - 2 
+        2. CodeBuild 
+        3. CodePipeline
+        4. EventBridge
+
+We also need main.yaml in both Repos 
+
+
+ 

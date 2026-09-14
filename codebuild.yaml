@@ -1,0 +1,55 @@
+Resources:
+  codebuildservicerole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - codebuild.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: codebuild-service-role-policy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:GetObjectVersion
+                  - s3:GetBucketVersioning
+                  - s3:PutObject
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - codebuild:BatchGetBuilds
+                  - codebuild:createReportGroup
+                  - codebuild:createReport
+                  - codebuild:batchPutTestCases
+                  - codebuild:batchPutCodeCoverages
+                Resource: "*"
+  cloudwatchloggroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/codebuild/codebuild-bootstrap
+      RetentionInDays: 14
+  codebuildbootstrap:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name: codebuild-bootstrap
+      Description: CodeBuild project for bootstrapping
+      Source: 
+        Type: CODEPIPELINE
+        gitCloneDepth: FULL
+      ServiceRole: !GetAtt codebuildservicerole.Arn
+      logsConfig:
+        CloudWatchLogs:
+          Status: ENABLED
+          GroupName: !Ref cloudwatchloggroup
+      Environment:
+          ComputeType: BUILD_GENERAL1_SMALL
+          Image: aws/codebuild/amazonlinux-x86_64-standard:6.0
+          Type: LINUX_CONTAINER 
