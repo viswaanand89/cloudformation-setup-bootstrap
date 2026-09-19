@@ -42,5 +42,9 @@ jobs:
       - name: Sts GetCallerIdentity
         run: |
           aws sts get-caller-identity
-          
+      - name: "Sync S3 Bucket"
+        run: |
+            ls -ltra
+            aws s3 sync ./ s3://bootstrapbucketnested
+                      
       
