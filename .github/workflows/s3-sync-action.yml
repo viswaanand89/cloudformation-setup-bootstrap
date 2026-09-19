@@ -27,8 +27,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
-      - name: "Configure AWS Credentials" Action for GitHub Actions"
+        run: echo "Hello, world!"
+      - name: "Configure AWS Credentials Action for GitHub Actions"
         # You may pin to the exact commit or the version.
         # uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd
         uses: aws-actions/configure-aws-credentials@v6.3.0
