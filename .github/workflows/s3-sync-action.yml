@@ -37,7 +37,7 @@ jobs:
         with:
           # AWS Region, e.g. us-east-2
           aws-region: us-east-1
-          role-to-assume: arn:aws:iam::211107604526:role/oidc
+          role-to-assume: arn:aws:iam::211107604526:role/GitHubOIDCRole
           role-session-name: githuboidcaction
       - name: Sts GetCallerIdentity
         run: |
