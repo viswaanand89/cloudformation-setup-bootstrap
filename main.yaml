@@ -7,7 +7,7 @@ Parameters:
   SourceBucketName:
     Type: String
     Description: The name of the S3 bucket containing the source code.
-    Default: resourcetemplatecfn
+    Default: "resourcetemplatecfn"
   SourceObjectKey:
     Type: String
     Description: The key of the source code object in the S3 bucket.
