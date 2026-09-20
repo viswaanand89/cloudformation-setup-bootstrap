@@ -3,15 +3,15 @@ Parameters:
   CodeBuildProjectName:
     Type: String
     Description: The name of the CodeBuild project to be used in the CodePipeline.
-    value: codebuild-bootstrap
+    Value: codebuild-bootstrap
   SourceBucketName:
     Type: String
     Description: The name of the S3 bucket containing the source code.
-    value: resourcetemplatecfn
+    Value: resourcetemplatecfn
   SourceObjectKey:
     Type: String
     Description: The key of the source code object in the S3 bucket.
-    value: .
+    Value: .
   
 Resources:
   myStackWithParams:
