@@ -71,3 +71,8 @@ Resources:
                   - Name: BuildOutput
                 Configuration:
                   ProjectName: !Ref CodeBuildProjectName
+
+Output:
+  codepipelinearn:
+    Description: The ARN of the created CodePipeline.
+    Value: !GetAtt codepipelinetest.Arn

@@ -1,0 +1,43 @@
+Resources:
+  evenbridgetest:
+    Type: AWS::Events::EventBus
+    Properties:
+      Name: eventbridgetrigger
+  eventbridgeRule:
+    Type: AWS::Events::Rule
+    Properties:
+      Name: eventbridgetrigger-rule
+      EventBusName: !Ref evenbridgetest
+      EventPattern:
+        source:
+          - "aws.s3"
+        detail-type:
+          - "Object Created"
+          - "Object Deleted"
+          - "Object Tags Added"
+          - "Object Tags Deleted"
+      Targets:
+        - Arn: !Ref codepipelinearn
+          Id: "codepipelinetarget"
+      RoleArn: !GetAtt eventbridgeRole.Arn
+  eventbridgeRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - events.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Policies:
+        - PolicyName: eventbridge-service-role-policy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - codepipeline:StartPipelineExecution
+                Resource: !GetAtt codepipelinetest.Arn
