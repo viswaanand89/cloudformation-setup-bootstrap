@@ -50,19 +50,19 @@ jobs:
         run: |
             stacklist=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --output json)
             echo "stacklist is $stacklist"
-            stack=$(echo "$stacklist" | jq 'any(.[]; . == "nestedstacktest")')
+            stack=$(echo "$stacklist" | jq 'any(.[]; . == "bootstrap-stack")')
             echo " stack is $stack"
             if [ "$stack" = "true" ]; then
                 echo "Stack exists, updating stack"
                 aws cloudformation update-stack \
                     --template-body file://main.yaml \
-                    --stack-name nestedstacktest \
+                    --stack-name bootstrap-stack \
                     --capabilities CAPABILITY_NAMED_IAM
             else
                 echo "Stack does not exist, creating stack"
                 aws cloudformation create-stack \
                     --template-body file://main.yaml \
-                    --stack-name nestedstacktest \
+                    --stack-name bootstrap-stack \
                     --capabilities CAPABILITY_NAMED_IAM
             fi
 
