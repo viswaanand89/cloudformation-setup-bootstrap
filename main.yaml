@@ -1,6 +1,23 @@
 AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  CodeBuildProjectName:
+    Type: String
+    Description: The name of the CodeBuild project to be used in the CodePipeline.
+    value: codebuild-bootstrap
+  SourceBucketName:
+    Type: String
+    Description: The name of the S3 bucket containing the source code.
+    value: resourcetemplatecfn
+  SourceObjectKey:
+    Type: String
+    Description: The key of the source code object in the S3 bucket.
+    value: .
+  
 Resources:
   myStackWithParams:
     Type: AWS::CloudFormation::Stack
     Properties:
-      TemplateURL: !Sub ""
+      TemplateURL: https://s3.amazonaws.com/bootstrapbucketnested/codepipeline.yaml
+      sourceBucketName: !Ref SourceBucketName
+      sourceObjectKey: !Ref SourceObjectKey
+      codeBuildProjectName: !Ref CodeBuildProjectName

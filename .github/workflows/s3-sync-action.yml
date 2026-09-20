@@ -46,5 +46,14 @@ jobs:
         run: |
             ls -ltra
             aws s3 sync ./ s3://bootstrapbucketnested --exclude ".git/*" --exclude ".github/*" --delete
+      - name: "Deploy CloudFormation Stack"
+        run: |
+            stacklist=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --output text)
+            echo "stacklist is $stacklist"
+            # aws cloudformation create-stack \
+            #     --template-file main.yaml \
+            #     --stack-name bootstrap-stack \
+            #     --capabilities CAPABILITY_NAMED_IAM
+      
                       
       

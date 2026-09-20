@@ -1,3 +1,10 @@
+Parameters:
+  cloudwatchloggroup:
+    Type: String
+    Description: The name of the CloudWatch log group for CodeBuild logs.
+  CodeBuildProjectName:
+    Type: String
+    Description: The name of the CodeBuild project to be used in the CodePipeline.
 Resources:
   codebuildservicerole:
     Type: AWS::IAM::Role
@@ -39,7 +46,7 @@ Resources:
   codebuildbootstrap:
     Type: AWS::CodeBuild::Project
     Properties:
-      Name: codebuild-bootstrap
+      Name: !Ref CodeBuildProjectName
       Description: CodeBuild project for bootstrapping
       Source: 
         Type: CODEPIPELINE
