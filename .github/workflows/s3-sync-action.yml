@@ -45,6 +45,6 @@ jobs:
       - name: "Sync S3 Bucket"
         run: |
             ls -ltra
-            aws s3 sync ./ s3://bootstrapbucketnested
+            aws s3 sync ./ s3://bootstrapbucketnested --exclude ".git/*,.github/*" --delete
                       
       
