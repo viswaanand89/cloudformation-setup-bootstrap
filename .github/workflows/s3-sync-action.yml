@@ -48,9 +48,9 @@ jobs:
             aws s3 sync ./ s3://bootstrapbucketnested --exclude ".git/*" --exclude ".github/*" --delete
       - name: "Deploy CloudFormation Stack"
         run: |
-            stacklist=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --output text)
+            stacklist=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --output json)
             echo "stacklist is $stacklist"
-            present=$(echo "$stacklist" | jq -r '' | grep -w "prerequisite-bootstrap-stacks")
+            present=$(echo "$stacklist" | jq -r '.[]' | grep -w "prerequisite-bootstrap-stacks")
             echo " stack is $present"
 
             # aws cloudformation create-stack \
