@@ -50,7 +50,7 @@ jobs:
         run: |
             stacklist=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --output json)
             echo "stacklist is $stacklist"
-            present=$(echo "$stacklist" | jq -r '.[]' | grep -w "bootstrap-stack" || true)
+            present=$(echo "$stacklist" | jq 'any(.[]; . == "bootstrap-stack")')
             echo " stack is $present"
 
             # aws cloudformation create-stack \
