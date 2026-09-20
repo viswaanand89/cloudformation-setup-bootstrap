@@ -49,7 +49,7 @@ jobs:
       - name: "Deploy CloudFormation Stack"
         run: |
             stacklist=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --output text)
-            echo "$stacklist" | jq -r '.[]' | grep -w "bootstrap-stack" || echo "bootstrap-stack not found"
+            echo "$stacklist" | jq -r '.[]' | grep -w "prerequisite-bootstrap-stacks" || echo "prerequisite-bootstrap-stacks exists"
 
             # aws cloudformation create-stack \
             #     --template-file main.yaml \
