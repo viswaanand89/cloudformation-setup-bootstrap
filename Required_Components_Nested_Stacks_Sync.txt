@@ -11,4 +11,6 @@ Github Actions Workflow :
 We also need main.yaml in both Repos 
 
 
- 
+While creating a Stack if its in Failed State or Rollback_complete,we need to delete and re-create them
+
+CloudFormation Stack events Status : https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/continuous-delivery-codepipeline-action-reference.html?utm_source=chatgpt.com 
