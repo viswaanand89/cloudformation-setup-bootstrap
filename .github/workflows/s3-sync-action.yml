@@ -50,9 +50,12 @@ jobs:
         run: |
             stacklist=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" --output json)
             echo "stacklist is $stacklist"
-            stack=$(echo "$stacklist" | jq 'any(.[]; . == "bootstrap-stack")')
-            echo " stack is $stack"
-            if [ "$stack" = "true" ]; then
+            status=$(aws cloudformation describe-stacks \
+              --stack-name bootstrap-stack \
+              --query 'Stacks[0].StackStatus' \
+              --output text 2>/dev/null || echo "DOES_NOT_EXIST")
+             echo " stack status is $status"
+            if [ "$status" = "CREATE_COMPLETE" ]; then
                 echo "Stack exists, updating stack"
                 aws cloudformation update-stack \
                     --template-body file://main.yaml \
