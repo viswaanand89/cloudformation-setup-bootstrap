@@ -60,13 +60,21 @@ jobs:
                 aws cloudformation update-stack \
                     --template-body file://main.yaml \
                     --stack-name bootstrap-stack \
-                    --capabilities CAPABILITY_NAMED_IAM
+                    --capabilities CAPABILITY_NAMED_IAM \
+                    --parameters \
+                      ParameterKey=CodeBuildProjectName,ParameterValue=codebuild-bootstrap \
+                      ParameterKey=SourceBucketName,ParameterValue=resourcetemplatecfn \
+                      ParameterKey=SourceObjectKey,ParameterValue=codepipeline.zip 
             else
                 echo "Stack does not exist, creating stack"
                 aws cloudformation create-stack \
                     --template-body file://main.yaml \
                     --stack-name bootstrap-stack \
-                    --capabilities CAPABILITY_NAMED_IAM
+                    --capabilities CAPABILITY_NAMED_IAM \
+                    --parameters \
+                      ParameterKey=CodeBuildProjectName,ParameterValue=codebuild-bootstrap \
+                      ParameterKey=SourceBucketName,ParameterValue=resourcetemplatecfn \
+                      ParameterKey=SourceObjectKey,ParameterValue=codepipeline.zip
             fi
 
             # aws cloudformation create-stack \
