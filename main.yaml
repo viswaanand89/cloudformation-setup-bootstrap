@@ -18,6 +18,7 @@ Resources:
     Type: AWS::CloudFormation::Stack
     Properties:
       TemplateURL: https://s3.amazonaws.com/bootstrapbucketnested/codepipeline.yaml
-      sourceBucketName: !Ref SourceBucketName
-      sourceObjectKey: !Ref SourceObjectKey
-      codeBuildProjectName: !Ref CodeBuildProjectName
+      Parameters:
+        codeBuildProjectName: !Ref CodeBuildProjectName
+        sourceBucketName: !Ref SourceBucketName
+        sourceObjectKey: !Ref SourceObjectKey
