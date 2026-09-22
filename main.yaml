@@ -19,6 +19,6 @@ Resources:
     Properties:
       TemplateURL: https://s3.amazonaws.com/bootstrapbucketnested/codepipeline.yaml
       Parameters:
-        codeBuildProjectName: !Ref CodeBuildProjectName
-        sourceBucketName: !Ref SourceBucketName
-        sourceObjectKey: !Ref SourceObjectKey
+        CodeBuildProjectName: !Ref CodeBuildProjectName
+        SourceBucketName: !Ref SourceBucketName
+        SourceObjectKey: !Ref SourceObjectKey
